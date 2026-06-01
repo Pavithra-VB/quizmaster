@@ -1,0 +1,12 @@
+name: Deploy Web Project
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # ... rest of your specific deployment steps
