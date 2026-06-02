@@ -105,6 +105,7 @@ function loadQuestion() {
   document.getElementById("question-text").textContent = q.q;
   document.getElementById("live-score").textContent = score;
   document.getElementById("progress-fill").style.width = ((current / TOTAL) * 100) + "%";
+
   const list = document.getElementById("options-list");
   list.innerHTML = "";
   const labels = ["A", "B", "C", "D"];
@@ -142,8 +143,14 @@ function handleAnswer(idx, clickedBtn) {
   const q = questions[current];
   const allBtns = document.querySelectorAll(".option-btn");
   allBtns.forEach(b => b.disabled = true);
-  if (idx === q.ans) { clickedBtn.classList.add("correct"); score += Math.max(10, timeLeft * 7); correctCount++; }
-  else { clickedBtn.classList.add("wrong"); allBtns[q.ans].classList.add("correct"); }
+  if (idx === q.ans) {
+    clickedBtn.classList.add("correct");
+    score += Math.max(10, timeLeft * 7);
+    correctCount++;
+  } else {
+    clickedBtn.classList.add("wrong");
+    allBtns[q.ans].classList.add("correct");
+  }
   document.getElementById("live-score").textContent = score;
   setTimeout(nextQuestion, 1200);
 }
@@ -170,11 +177,11 @@ function showResult() {
   document.getElementById("stat-w").textContent = TOTAL - correctCount;
   document.getElementById("stat-a").textContent = pct + "%";
   const data =
-    correctCount === TOTAL ? ["🏆","Perfect Score!","You got every question right!"] :
-    correctCount >= 8      ? ["🎯","Brilliant!","Outstanding result. Almost perfect!"] :
-    correctCount >= 6      ? ["👍","Good Job!","Solid performance. Keep practising!"] :
-    correctCount >= 4      ? ["📖","Not Bad!","A fair attempt. Try again to improve!"] :
-                             ["💡","Keep Going!","Every attempt makes you better!"];
+    correctCount === TOTAL ? ["🏆", "Perfect Score!", "You got every question right!"] :
+    correctCount >= 8      ? ["🎯", "Brilliant!", "Outstanding result. Almost perfect!"] :
+    correctCount >= 6      ? ["👍", "Good Job!", "Solid performance. Keep practising!"] :
+    correctCount >= 4      ? ["📖", "Not Bad!", "A fair attempt. Try again to improve!"] :
+                             ["💡", "Keep Going!", "Every attempt makes you better!"];
   document.getElementById("result-icon").textContent = data[0];
   document.getElementById("result-heading").textContent = data[1];
   document.getElementById("result-sub").textContent = data[2];

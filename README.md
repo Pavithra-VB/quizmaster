@@ -1,27 +1,75 @@
-# 🧠 Quiz Master Application
+# QuizMaster
 
-A web-based interactive quiz application built with HTML, CSS, and JavaScript. This project is containerized using Docker and deployed automatically using CI/CD practices.
+A simple interactive quiz web application built with HTML, CSS, and JavaScript.
+Deployed using Docker and automated via GitHub Actions CI/CD pipeline.
 
-## 🚀 Live Demo
-You can view the live deployed application here: 
-👉 [https://quizmaster-latest.onrender.com](https://quizmaster-latest.onrender.com)
+## Features
 
----
+- 4 quiz categories: General Knowledge, Science, Technology, History
+- 10 questions per round with 15 second countdown timer
+- Speed bonus scoring system
+- Fully responsive for mobile and desktop
+- Dockerized with nginx for deployment
 
-## 🛠️ Tech Stack & Tools Used
+## Project Structure
 
-* **Frontend:** HTML5, CSS3, JavaScript (ES6)
-* **Web Server:** Nginx (Alpine Linux base image)
-* **Containerization:** Docker
-* **CI/CD Pipeline:** GitHub Actions
-* **Cloud Deployment Platform:** Render
+quizmaster/
+├── index.html                   
+├── style.css                    
+├── quiz.js                      
+├── Dockerfile                   
+├── .github/
+│   └── workflows/
+│       └── deploy.yml           
+└── README.md
 
----
+## Run Locally with Docker
 
-## 📦 How to Run Locally Using Docker
+# Clone the repository
+git clone https://github.com/<your-username>/quizmaster.git
+cd quizmaster
 
-If you want to run this project on your own machine, ensure you have Docker Desktop installed, then run the following commands in your terminal:
+# Build the Docker image
+docker build -t quizmaster .
 
-1. **Build the Docker Image:**
-   ```bash
-   docker build -t quizmaster:latest .
+# Run the container
+docker run -p 8080:80 quizmaster
+
+# Open in browser
+# http://localhost:8080
+
+## GitHub Actions Setup
+
+Pipeline runs automatically on every push to main branch.
+
+Stages:
+1. Validate - checks all required files exist
+2. Build - builds Docker image and tests the container
+3. Push - pushes image to Docker Hub
+
+### Add These Secrets in GitHub
+
+Go to Settings > Secrets and variables > Actions and add:
+
+| Secret            | Value                        |
+|-------------------|------------------------------|
+| DOCKER_USERNAME   | Your Docker Hub username     |
+| DOCKER_PASSWORD   | Your Docker Hub password     |
+
+## Deploy on Render
+
+1. Push Docker image to Docker Hub via CI/CD pipeline
+2. Go to render.com and create New Web Service
+3. Select Deploy an existing image from a registry
+4. Enter image: docker.io/<your-username>/quizmaster:latest
+5. Set port to 80 and click Deploy
+
+## GitHub Concepts Used
+
+| Concept          | Usage                                   |
+|------------------|-----------------------------------------|
+| Branches         | main branch for production              |
+| Commits          | Track every change with messages        |
+| Pull Requests    | Review changes before merging           |
+| GitHub Actions   | Automated CI/CD pipeline                |
+| Secrets          | Secure Docker Hub credentials           |
