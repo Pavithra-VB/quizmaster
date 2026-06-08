@@ -1,103 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QuizMaster</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master Challenge</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- START SCREEN -->
-  <div id="start-screen" class="screen active">
-    <div class="container">
-      <h1>QuizMaster</h1>
-      <p class="subtitle">Test your knowledge. Choose a category and begin.</p>
-
-      <div class="category-section">
-        <label>Select Category</label>
-        <div class="cat-grid">
-          <button class="cat-btn selected" data-cat="general">General Knowledge</button>
-          <button class="cat-btn" data-cat="science">Science</button>
-          <button class="cat-btn" data-cat="tech">Technology</button>
-          <button class="cat-btn" data-cat="history">History</button>
+    <div class="quiz-container">
+        
+        <div id="start-screen" class="screen active">
+            <h1 class="logo">🧠 Quiz Master</h1>
+            <p class="subtitle">Select a category to test your knowledge</p>
+            
+            <div class="category-grid">
+                <button class="cat-btn selected" data-cat="general">🌍 General</button>
+                <button class="cat-btn" data-cat="science">🧪 Science</button>
+                <button class="cat-btn" data-cat="tech">💻 Tech / DevOps</button>
+                <button class="cat-btn" data-cat="history">📜 History</button>
+            </div>
+            
+            <button id="start-btn" class="action-btn">Start Challenge 🚀</button>
         </div>
-      </div>
 
-      <div class="info-row">
-        <div class="info-box"><span>10</span><small>Questions</small></div>
-        <div class="info-box"><span>15s</span><small>Per Question</small></div>
-        <div class="info-box"><span>4</span><small>Categories</small></div>
-      </div>
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <span id="q-label">Question 1 of 10</span>
+                <div class="header-stats">
+                    <span>Score: <strong id="live-score">0</strong></span>
+                </div>
+            </div>
 
-      <button id="start-btn" class="btn-main">Start Quiz</button>
+            <div class="progress-bar">
+                <div id="progress-fill" style="width: 0%;"></div>
+            </div>
+
+            <div class="question-body">
+                <div class="timer-wrapper">
+                    <svg class="timer-svg" viewBox="0 0 40 40">
+                        <circle class="timer-bg" cx="20" cy="20" r="18"></circle>
+                        <circle id="timer-circle" class="timer-progress" cx="20" cy="20" r="18" stroke-dasharray="113.1" stroke-dashoffset="0"></circle>
+                    </svg>
+                    <div id="timer-num">15</div>
+                </div>
+                <span id="q-tag">Q1</span>
+                <p id="question-text">Loading question...</p>
+            </div>
+
+            <div id="options-list" class="options">
+                </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div id="result-icon">🏆</div>
+            <h2 id="result-heading">Perfect Score!</h2>
+            <p id="result-sub">You got every question right!</p>
+
+            <div class="score-display">
+                <span id="score-num">0</span> / 10
+            </div>
+
+            <table class="stats-table">
+                <tr><td>✅ Correct Answers:</td><td id="stat-c">0</td></tr>
+                <tr><td>❌ Wrong Answers:</td><td id="stat-w">0</td></tr>
+                <tr><td>📊 Accuracy Rate:</td><td id="stat-a">0%</td></tr>
+            </table>
+
+            <div class="result-actions">
+                <button id="retry-btn" class="action-btn">Try Again 🔄</button>
+                <button id="home-btn" class="action-btn secondary-btn">Main Menu 🏠</button>
+            </div>
+        </div>
+
     </div>
-  </div>
 
-  <!-- QUIZ SCREEN -->
-  <div id="quiz-screen" class="screen">
-    <div class="container">
-      <div class="quiz-top">
-        <div class="left-info">
-          <span id="q-label">Question 1 of 10</span>
-          <div class="progress-bar">
-            <div id="progress-fill"></div>
-          </div>
-        </div>
-        <div class="right-info">
-          <div class="timer-box">
-            <svg viewBox="0 0 44 44">
-              <circle class="bg-circle" cx="22" cy="22" r="18"/>
-              <circle class="fg-circle" id="timer-circle" cx="22" cy="22" r="18"/>
-            </svg>
-            <span id="timer-num">15</span>
-          </div>
-          <div class="score-box">Score: <strong id="live-score">0</strong></div>
-        </div>
-      </div>
-
-      <div class="question-box">
-        <p class="q-tag" id="q-tag">Q1</p>
-        <h2 id="question-text">Loading question...</h2>
-      </div>
-
-      <div class="options-list" id="options-list"></div>
-    </div>
-  </div>
-
-  <!-- RESULT SCREEN -->
-  <div id="result-screen" class="screen">
-    <div class="container result-container">
-      <div class="result-icon" id="result-icon">&#127942;</div>
-      <h2 id="result-heading">Well done!</h2>
-      <p id="result-sub">You completed the quiz.</p>
-
-      <div class="score-big">
-        <span id="score-num">0</span><span class="score-total">/ 10</span>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card correct">
-          <span id="stat-c">0</span>
-          <small>Correct</small>
-        </div>
-        <div class="stat-card wrong">
-          <span id="stat-w">0</span>
-          <small>Wrong</small>
-        </div>
-        <div class="stat-card accuracy">
-          <span id="stat-a">0%</span>
-          <small>Accuracy</small>
-        </div>
-      </div>
-
-      <div class="result-btns">
-        <button id="retry-btn" class="btn-main">Play Again</button>
-        <button id="home-btn" class="btn-outline">Home</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="quiz.js"></script>
+    <script src="quiz.js"></script>
 </body>
 </html>
